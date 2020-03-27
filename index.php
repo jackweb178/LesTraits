@@ -15,10 +15,10 @@ class MaClasse
 {
     use A
     {
-        traitA as traitB;//renommer trait A a trait B
+        traitA as protected traitB;//renommer trait A a trait B
     }
 }
 
 $m= new MaClasse();
 $m->traitA();//affiche je suis le trait A
-$m->traitB();//affiche je suis le trait A
+$m->traitB();//levera une erreur fatal car l'alias est une methode proteger
