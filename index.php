@@ -9,7 +9,12 @@ trait A
     abstract public function traitA();
 }
 
-class MaClasse //on doit forcement implementer la methode traitA() dans cette classe
+abstract class Mere
 {
     use A;
+}
+//jusque la aucune errreur nest lever
+class  Fille extends Mere
+{
+    //par contre ic il ya une erreur fatal car la methode traitA() n'a pas ete implementée
 }
