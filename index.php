@@ -1,34 +1,26 @@
 <?php
 //les traits  permettent deviter la duplicaion du code dune methode dans plusieurs classe
 
-//https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php/1667373-les-traits#/id/r-1670619
-trait HTMLFormater //declaration du trait
+//https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php/1667373-les-traits#/id/r-1670627
+/*
+ *Si une classe déclare une méthode et qu'elle utilise un trait possédant cette même méthode, alors la méthode déclarée dans la classe l'emportera sur la méthode déclarée dans le trait. Exemple :
+ * */
+trait MonTrait
 {
-    public function formatText($text)
+    public function sayHello()
     {
-        return '<p> Date : '.date('d/m/y').'</p>'."\n".'<p>'.nl2br($text).'</p>';///nl2br =<br>
+        echo 'Hello trait !';
     }
 }
 
-trait TextFormater
+class MaClasse
 {
-    public function formatText($text)
+    use MonTrait;
+    public function sayHello()
     {
-        return 'Date : '.date('yy/m/d')."\n\n".nl2br($text);
+        echo  "Bonjours classe";
     }
 }
 
-class Writer
-{
-    use HTMLFormater, TextFormater
-    {
-        HTMLFormater::formatText insteadof TextFormater;//la methode formatText() du trait HTMLFormater écrasera la méthode du même nom du trait TextFormater(si elle y est définie)
-    }
-    public function write($text)
-    {
-        file_put_contents('fichier.html' , $this->formatText($text));
-    }
-}
-
-$w=new Writer;
-$w->write('hello word !');
+$m= new MaClasse;
+$m->sayHello();
