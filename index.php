@@ -1,24 +1,32 @@
 <?php
 //les traits  permettent deviter la duplicaion du code dune methode dans plusieurs classe
 
-//https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php/1667373-les-traits#/id/r-1670642
+//https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php/1667373-les-traits#/id/r-1670645
 /*
  *
-Nous avons vu que les traits servaient à isoler des méthodes afin de pouvoir les utiliser dans deux classes totalement indépendantes. Si le besoin s'en fait sentir, sachez que vous pouvez aussi définir des attributs dans votre trait. Ils seront alors à leur tour importés dans la classe qui utilisera ce trait. Exemple :
+Au même titre que les classes, les traits peuvent eux aussi utiliser des traits. La façon de procéder est la même qu'avec les classes, tout comme la gestion des conflits entre méthodes. Voici un exemple :
  * */
-trait MonTrait
+trait A
 {
-    protected  $attribut = "Hello !";
-    public function showAttribut()
+    public function traitA()
     {
-        echo $this->attribut;
+        echo 'je suis le trais A';
     }
 }
 
+trait B
+{
+    use A;
+    public function traitB()
+    {
+        echo '<br>je suis le trais B';
+    }
+}
 class MaClasse
 {
-    use MonTrait;
+    use B;
 }
 
 $m= new MaClasse();
-$m->showAttribut();
+$m->traitA();//affiche je suis le trait A
+$m->traitB();//affiche je suis le traits B
