@@ -7,7 +7,7 @@ trait A
 {
     public function traitA()
     {
-        echo 'je suis le trais A';
+        echo 'je suis le trais A <br>';
     }
 }
 
@@ -15,9 +15,10 @@ class MaClasse
 {
     use A
     {
-        traitA as protected;
+        traitA as traitB;//renommer trait A a trait B
     }
 }
 
 $m= new MaClasse();
-$m->traitA();//levera une erreur car on tente d'acceder a une mehode proteger
+$m->traitA();//affiche je suis le trait A
+$m->traitB();//affiche je suis le trait A
